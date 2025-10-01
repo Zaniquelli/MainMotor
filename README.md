@@ -115,6 +115,9 @@ MainMotor.API/
 └── Middleware/      # Middlewares customizados
 ```
 
+#### Diagrama do banco de dados
+![Diagrama do banco de dados](https://raw.githubusercontent.com/Zaniquelli/MainMotor/refs/heads/main/docs/database.png)
+
 ### Padrões Implementados
 
 #### Repository Pattern
