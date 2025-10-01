@@ -1,0 +1,475 @@
+{
+  "info": {
+    "name": "MainMotor API - Demo",
+    "description": "Complete end-to-end demonstration of MainMotor API with enhanced payment processing. Features: CPF validation, multiple payment types, transaction ID generation, payment URLs, and webhook processing.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "host",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "demoCustomerCpf",
+      "value": "91509161066"
+    },
+    {
+      "key": "demoCustomerName",
+      "value": "Ana Paula Oliveira"
+    },
+    {
+      "key": "demoCustomerEmail",
+      "value": "ana.paula@email.com"
+    },
+    {
+      "key": "demoCustomerPhone",
+      "value": "(11) 98888-8888"
+    },
+    {
+      "key": "demoSalespersonName",
+      "value": "Carlos Vendedor"
+    },
+    {
+      "key": "demoSalespersonEmail",
+      "value": "carlos.vendedor@mainmotor.com"
+    },
+    {
+      "key": "demoVinNumber",
+      "value": "12345678901"
+    },
+    {
+      "key": "demoLicensePlate",
+      "value": "DEMO123"
+    },
+    {
+      "key": "registeredSaleId",
+      "value": "id_venda_inicial_teste"
+    },
+    {
+      "key": "paymentId",
+      "value": ""
+    },
+    {
+      "key": "transactionId",
+      "value": "id_transacao_inicial_teste"
+    },
+    {
+      "key": "paymentUrl",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Reference Data",
+      "item": [
+        {
+          "name": "Get Brands",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/brands",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "brands" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const brands = pm.response.json();",
+                  "    if (brands.length > 0) {",
+                  "        pm.collectionVariables.set('firstBrandId', brands[0].id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Models by Brand",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/models/by-brand/{{firstBrandId}}",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "models", "by-brand", "{{firstBrandId}}" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const models = pm.response.json();",
+                  "    if (models.length > 0) {",
+                  "        pm.collectionVariables.set('firstModelId', models[0].id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Model Years by Model",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/modelyears/by-model/{{firstModelId}}",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "modelyears", "by-model", "{{firstModelId}}" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const modelYears = pm.response.json();",
+                  "    if (modelYears.length > 0) {",
+                  "        pm.collectionVariables.set('firstModelYearId', modelYears[0].id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Characteristic Types",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/characteristictypes",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "characteristictypes" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const types = pm.response.json();",
+                  "    if (types.length > 0) {",
+                  "        pm.collectionVariables.set('firstCharacteristicTypeId', types[0].id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Characteristics by Type",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}/api/characteristics/by-type/{{firstCharacteristicTypeId}}",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "characteristics", "by-type", "{{firstCharacteristicTypeId}}" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const characteristics = pm.response.json();",
+                  "    if (characteristics.length > 0) {",
+                  "        pm.collectionVariables.set('firstCharacteristicId', characteristics[0].id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Basic Data Registration",
+      "item": [
+        {
+          "name": "Create Salesperson",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{demoSalespersonName}}\",\n  \"email\": \"{{demoSalespersonEmail}}\",\n  \"phone\": \"(11) 97777-7777\",\n  \"commissionRate\": 0.05\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/salespeople",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "salespeople" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const salesperson = pm.response.json();",
+                  "    pm.collectionVariables.set('createdSalespersonId', salesperson.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Vehicle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vinNumber\": \"{{demoVinNumber}}\",\n  \"licensePlate\": \"{{demoLicensePlate}}\",\n  \"characteristicIds\": [\n    \"{{firstCharacteristicId}}\"\n  ],\n  \"mileage\": 25000,\n  \"purchasePrice\": 22000.00,\n  \"salePrice\": 28000.00,\n  \"status\": 1,\n  \"notes\": \"Demo vehicle - Honda Civic 2020 automatic\",\n  \"modelYearId\": \"{{firstModelYearId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/vehicles",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "vehicles" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const vehicle = pm.response.json();",
+                  "    pm.collectionVariables.set('createdVehicleId', vehicle.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Sales Flow",
+      "item": [
+        {
+          "name": "Register Sale with CPF - Credit Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerCpf\": \"{{demoCustomerCpf}}\",\n  \"saleDate\": \"2024-12-01T14:30:00Z\",\n  \"vehicleId\": \"{{createdVehicleId}}\",\n  \"customerName\": \"{{demoCustomerName}}\",\n  \"customerEmail\": \"{{demoCustomerEmail}}\",\n  \"customerPhone\": \"{{demoCustomerPhone}}\",\n  \"paymentType\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/sales/register",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "sales", "register" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    try {",
+                  "        const response = pm.response.json();",
+                  "        console.log('Full response:', JSON.stringify(response, null, 2));",
+                  "        ",
+                  "        pm.collectionVariables.set('registeredSaleId', response.sale.id);",
+                  "        pm.collectionVariables.set('paymentId', response.payment.id);",
+                  "        pm.collectionVariables.set('transactionId', response.transactionId);",
+                  "        ",
+                  "        console.log('Variables set:');",
+                  "        console.log('- registeredSaleId:', response.sale.id);",
+                  "        console.log('- paymentId:', response.payment.id);",
+                  "        console.log('- transactionId:', response.transactionId);",
+                  "    } catch (e) {",
+                  "        console.log('Error parsing response:', e);",
+                  "        console.log('Raw response:', pm.response.text());",
+                  "    }",
+                  "} else {",
+                  "    console.log('Request failed with status:', pm.response.code);",
+                  "    console.log('Error response:', pm.response.text());",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Payment Processing",
+      "item": [
+        {
+          "name": "Process Payment Webhook - Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionId\": \"{{transactionId}}\",\n  \"status\": \"paid\",\n  \"saleId\": \"{{registeredSaleId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Process payment success. Make sure to run the Register Sale request first to populate transactionId and registeredSaleId variables.",
+            "url": {
+              "raw": "{{host}}/api/payments/webhook",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "payments", "webhook" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "pre-request",
+              "script": {
+                "exec": [
+                  "const transactionId = pm.collectionVariables.get('transactionId');",
+                  "const saleId = pm.collectionVariables.get('registeredSaleId');",
+                  "",
+                  "if (!transactionId || !saleId) {",
+                  "    console.error('ERRO: Execute primeiro o Register Sale para criar a venda e pagamento!');",
+                  "    console.error('transactionId atual:', transactionId);",
+                  "    console.error('registeredSaleId atual:', saleId);",
+                  "    throw new Error('Variáveis não definidas. Execute Register Sale primeiro.');",
+                  "}",
+                  "",
+                  "console.log('Webhook será executado com:');",
+                  "console.log('- transactionId:', transactionId);",
+                  "console.log('- saleId:', saleId);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "console.log('Webhook response status:', pm.response.code);",
+                  "console.log('Webhook response:', pm.response.text());"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Process Payment Webhook - Cancelled",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionId\": \"{{transactionId}}\",\n  \"status\": \"cancelled\",\n  \"saleId\": \"{{registeredSaleId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/payments/webhook",
+              "host": [ "{{host}}" ],
+              "path": [ "api", "payments", "webhook" ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    console.log('Payment cancellation processed!');",
+                  "    console.log('Vehicle status should now be Available again');",
+                  "    console.log('Payment status should now be Cancelled');",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

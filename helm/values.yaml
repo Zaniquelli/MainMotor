@@ -1,0 +1,13 @@
+app:
+  name: mainmotor-api
+  image: mainmotor-api:latest
+  imagePullPolicy: Never
+  port: 8080
+  replicas: 2
+
+postgres:
+  enabled: true
+  database: mainmotor
+  username: postgres
+  password: postgres
+  port: 5432

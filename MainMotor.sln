@@ -1,0 +1,110 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainMotor.Domain", "MainMotor.Domain\MainMotor.Domain.csproj", "{92E64A6B-F7B3-4655-9631-64E1AC64917F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainMotor.Application", "MainMotor.Application\MainMotor.Application.csproj", "{FC4A9299-6054-4445-B784-13C25606B2E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainMotor.Infrastructure", "MainMotor.Infrastructure\MainMotor.Infrastructure.csproj", "{00E128C5-C275-40E6-BD67-86167BBEAB23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainMotor.API", "MainMotor.API\MainMotor.API.csproj", "{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.env = .env
+		.env.example = .env.example
+		.gitignore = .gitignore
+		deploy-minikube.bat = deploy-minikube.bat
+		docker-compose.yml = docker-compose.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "helm", "helm", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		helm\Chart.yaml = helm\Chart.yaml
+		helm\values.yaml = helm\values.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{CE0BBAA3-CAFC-4832-B17D-FE38EA4FCB9E}"
+	ProjectSection(SolutionItems) = preProject
+		helm\templates\configmap.yaml = helm\templates\configmap.yaml
+		helm\templates\deployment.yaml = helm\templates\deployment.yaml
+		helm\templates\hpa.yaml = helm\templates\hpa.yaml
+		helm\templates\postgres-local.yaml = helm\templates\postgres-local.yaml
+		helm\templates\secret.yaml = helm\templates\secret.yaml
+		helm\templates\service.yaml = helm\templates\service.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Debug|x64.Build.0 = Debug|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Debug|x86.Build.0 = Debug|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Release|x64.ActiveCfg = Release|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Release|x64.Build.0 = Release|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Release|x86.ActiveCfg = Release|Any CPU
+		{92E64A6B-F7B3-4655-9631-64E1AC64917F}.Release|x86.Build.0 = Release|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Debug|x64.Build.0 = Debug|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Release|x64.ActiveCfg = Release|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Release|x64.Build.0 = Release|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC4A9299-6054-4445-B784-13C25606B2E4}.Release|x86.Build.0 = Release|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Debug|x64.Build.0 = Debug|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Debug|x86.Build.0 = Debug|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Release|x64.ActiveCfg = Release|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Release|x64.Build.0 = Release|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Release|x86.ActiveCfg = Release|Any CPU
+		{00E128C5-C275-40E6-BD67-86167BBEAB23}.Release|x86.Build.0 = Release|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Debug|x64.Build.0 = Debug|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Debug|x86.Build.0 = Debug|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Release|x64.ActiveCfg = Release|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Release|x64.Build.0 = Release|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D4013E2-179B-4957-9CB6-33AD7A4F1EB8}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE0BBAA3-CAFC-4832-B17D-FE38EA4FCB9E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91FEDEE5-BCCC-4938-A878-EA7E3D238261}
+	EndGlobalSection
+EndGlobal

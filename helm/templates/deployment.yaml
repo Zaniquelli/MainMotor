@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+      - name: api
+        image: {{ .Values.app.image }}
+        imagePullPolicy: {{ .Values.app.imagePullPolicy | default "IfNotPresent" }}
+        ports:
+        - containerPort: {{ .Values.app.port }}
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.app.name }}-secret
+              key: connection-string
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.app.name }}-config

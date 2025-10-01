@@ -1,0 +1,84 @@
+{
+  "name": "Acura",
+  "code": "1",
+  "models": [
+    {
+      "name": "Integra GS 1.8",
+      "code": "1",
+      "years": [
+        {
+          "name": "1992 Gasolina",
+          "code": "1992-1"
+        },
+        {
+          "name": "1991 Gasolina",
+          "code": "1991-1"
+        }
+      ]
+    },
+    {
+      "name": "Legend 3.2/3.5",
+      "code": "2",
+      "years": [
+        {
+          "name": "1998 Gasolina",
+          "code": "1998-1"
+        },
+        {
+          "name": "1997 Gasolina",
+          "code": "1997-1"
+        },
+        {
+          "name": "1996 Gasolina",
+          "code": "1996-1"
+        },
+        {
+          "name": "1995 Gasolina",
+          "code": "1995-1"
+        },
+        {
+          "name": "1994 Gasolina",
+          "code": "1994-1"
+        },
+        {
+          "name": "1993 Gasolina",
+          "code": "1993-1"
+        },
+        {
+          "name": "1992 Gasolina",
+          "code": "1992-1"
+        },
+        {
+          "name": "1991 Gasolina",
+          "code": "1991-1"
+        }
+      ]
+    },
+    {
+      "name": "NSX 3.0",
+      "code": "3",
+      "years": [
+        {
+          "name": "1995 Gasolina",
+          "code": "1995-1"
+        },
+        {
+          "name": "1994 Gasolina",
+          "code": "1994-1"
+        },
+        {
+          "name": "1993 Gasolina",
+          "code": "1993-1"
+        },
+        {
+          "name": "1992 Gasolina",
+          "code": "1992-1"
+        },
+        {
+          "name": "1991 Gasolina",
+          "code": "1991-1"
+        }
+      ]
+    }
+  ]
+}
