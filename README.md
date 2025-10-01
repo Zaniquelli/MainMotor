@@ -1,4 +1,5 @@
 
+
 # MainMotor API
 
 **MainMotor** é uma API para plataforma online de revenda de veículos desenvolvida em C# e .NET 9 seguindo os princípios de Clean Architecture e SOLID. O sistema foca no cadastro, edição, venda e listagem de veículos, além de integração com sistemas de pagamento externos via webhook.
@@ -8,8 +9,8 @@
 - **Gestão de Veículos**: Cadastro, edição e listagem de veículos com filtros por status e ordenação por preço
 - **Marketplace**: Listagem de veículos disponíveis e histórico de vendas
 - **Registro de Vendas**: Sistema de vendas com validação de CPF e criação automática de clientes
-- **Webhook de Pagamentos**: Integração com sistemas de pagamento externos
-- **Documentação OpenAPI**: Interface Swagger completa para testes e integração
+- **Webhook de Pagamentos**: Esqueleto para integração com sistemas de pagamento externos
+- **Documentação OpenAPI**: Interface Swagger completa para testes
 
 ## 🏗️ Arquitetura
 
@@ -24,7 +25,7 @@ MainMotor/
 ```
 
 ### Fluxo de Dependências
-- **MainMotor.Domain**: Sem dependências externas (lógica de negócio pura)
+- **MainMotor.Domain**: Sem dependências externas
 - **MainMotor.Application**: Referencia apenas Domain
 - **MainMotor.Infrastructure**: Referencia Domain e Application
 - **MainMotor.API**: Referencia todos os projetos (composition root)
@@ -37,14 +38,13 @@ MainMotor/
 - **C# 12**: Linguagem com recursos modernos
 
 ### Banco de Dados
-- **PostgreSQL 15+**: Banco de dados principal
+- **PostgreSQL 15**: Banco de dados principal
 - **Entity Framework Core 9**: ORM com suporte completo ao PostgreSQL
 - **UUID v7**: Identificadores únicos ordenáveis por tempo
 
-### Documentação e Testes
-- **OpenAPI 3.0**: Documentação interativa da API
-- **Swagger/Swashbuckle**: Geração automática de documentação
-- **PowerShell Scripts**: Testes automatizados
+### Documentação
+- **OpenAPI 3.0**: Documentação JSON da API
+- **Swagger/Swashbuckle**: Geração automática da UI da documentação
 
 ### Containerização e Deploy
 - **Docker**: Containerização da aplicação
@@ -102,14 +102,14 @@ MainMotor.Application/
 MainMotor.Infrastructure/
 ├── Data/             # DbContext e configurações EF
 ├── Repositories/     # Implementações de repositório
-├── Services/         # Serviços externos
+├── Services/         # Serviços
 └── Migrations/       # Migrações do banco
 ```
 
 #### API (Interface)
 ```
 MainMotor.API/
-├── Controllers/      # Endpoints da API
+├── Controllers/     # Endpoints da API
 ├── Models/          # ViewModels e DTOs da API
 ├── Filters/         # Filtros customizados
 └── Middleware/      # Middlewares customizados
@@ -167,10 +167,10 @@ MainMotor.API/
 ### Pré-requisitos
 - .NET 9 SDK
 - Docker e Docker Compose
-- **Minikube**: Para executar clusters Kubernetes localmente
-- **Kubectl**: Para gerenciar os recursos do cluster Kubernetes
-- **Helm**: Para gerenciar os pacotes Kubernetes
-- PostgreSQL (ou usar container Docker, recomendado)
+- Minikube: Para executar clusters Kubernetes localmente
+- Kubectl: Para gerenciar os recursos do cluster Kubernetes
+- Helm: Para gerenciar os pacotes Kubernetes
+- PostgreSQL
 
 ### 1. Execução com Docker (Recomendado)
 
@@ -182,12 +182,12 @@ cd MainMotor
 # Execute com Docker Compose (inclui PostgreSQL)
 docker-compose up -d
 
-# A API/Swagger UI estará disponível em http://localhost:5258 ou https://localhost:7171
+# A API/Swagger UI estará disponível em http://localhost:8080
 ```
 
 ### 2. Deploy em Kubernetes com Minikube
 
-#### Método Rápido (Script Automatizado)
+#### Script Automatizado para Windows
 ```bash
 # Execute o script que configura tudo automaticamente
 ./deploy-minikube.bat
@@ -322,28 +322,6 @@ helm list
 helm status mainmotor-api
 ```
 
-## 🔌 Endpoints da API
-
-### Veículos
-- `GET /api/vehicles` - Listar todos os veículos
-- `GET /api/vehicles?status=Available&orderBy=price` - Marketplace (veículos à venda)
-- `GET /api/vehicles?status=Sold&orderBy=price` - Histórico de vendas
-- `POST /api/vehicles` - Cadastrar novo veículo
-- `PUT /api/vehicles/{id}` - Editar veículo (apenas se disponível)
-
-### Vendas
-- `GET /api/sales` - Listar todas as vendas
-- `POST /api/sales/register` - Registrar venda com CPF (marketplace)
-- `POST /api/sales` - Criar venda direta
-
-### Pagamentos (Webhook)
-- `POST /api/payments/webhook` - Processar notificações de pagamento
-
-### Outros
-- `GET /api/customers` - Gestão de clientes
-- `GET /api/salespeople` - Gestão de vendedores
-- `GET /api/modelyears` - Dados de referência (marcas/modelos/anos)
-
 ## 🐛 Tratamento de Erros
 
 A API retorna códigos HTTP apropriados:
@@ -370,11 +348,9 @@ A API retorna códigos HTTP apropriados:
 
 Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
-## 🚀 Deploy e Produção
+## 🚀 Kubernetes Production Setup
 
-### Kubernetes Production Setup
-
-#### Deploy com Helm
+### Deploy com Helm
 ```bash
 # Deploy em produção (customizar values.yaml conforme necessário)
 helm install mainmotor ./helm --namespace mainmotor --create-namespace
@@ -387,7 +363,7 @@ kubectl get services -n mainmotor
 helm list -n mainmotor
 ```
 
-#### Monitoramento
+### Monitoramento
 ```bash
 # Logs da aplicação
 kubectl logs -f deployment/mainmotor-api -n mainmotor
@@ -436,13 +412,6 @@ kubectl delete configmap mainmotor-api-config
 
 # Reinstalar
 helm upgrade --install mainmotor-api ./helm
-```
-
-### Logs de Debug
-```bash
-# Habilitar logs detalhados
-export ASPNETCORE_ENVIRONMENT=Development
-export Logging__LogLevel__Default=Debug
 ```
 
 ---
